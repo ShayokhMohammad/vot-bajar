@@ -5,85 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ভোট বাজার - শায়খ মোহাম্মদ</title>
     <style>
-        body { font-family: 'Hind Siliguri', sans-serif; background-color: #0d1117; color: #c9d1d9; text-align: center; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d1117; color: #c9d1d9; text-align: center; margin: 0; padding: 20px; }
         
-        /* ডেভেলপার ট্যাগ স্টাইল */
-        .developer-tag { 
-            font-size: 14px; 
-            color: #8b949e; 
-            margin-bottom: 10px; 
-            display: block;
-            letter-spacing: 1px;
-        }
-        .developer-tag span { color: #f85149; font-weight: bold; }
+        .container { max-width: 600px; margin: auto; background: #161b22; padding: 25px; border-radius: 20px; border: 1px solid #30363d; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+        
+        /* ডেভেলপার ট্যাগ */
+        .dev-name { font-size: 0.9rem; color: #8b949e; margin-bottom: 5px; display: block; }
+        .dev-name b { color: #58a6ff; }
 
-        .container { max-width: 600px; margin: auto; background: #161b22; padding: 25px; border-radius: 20px; border: 2px solid #30363d; box-shadow: 0 0 20px rgba(255,0,0,0.2); }
-        h1 { color: #f85149; text-shadow: 2px 2px #000; margin-top: 5px; }
-        .tagline { color: #8b949e; font-style: italic; }
-        
-        .secret-card { background: #21262d; border: 1px dashed #f85149; padding: 15px; margin: 15px 0; border-radius: 12px; transition: 0.4s; cursor: crosshair; }
-        .secret-card:hover { background: #b62323; color: white; transform: rotate(-1deg); }
-        
-        .price { font-weight: bold; color: #3fb950; display: block; margin-top: 5px; }
-        
-        .warning-light { height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block; animation: blink 0.8s infinite; }
+        /* স্ট্যাটাস লাইট */
+        .status { font-size: 0.8rem; color: #f85149; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .dot { height: 8px; width: 8px; background-color: #f85149; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+        h1 { color: #f85149; margin: 10px 0; font-size: 2rem; }
+        .tagline { font-style: italic; color: #8b949e; margin-bottom: 20px; }
         
-        button { background: #238636; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 16px; margin-top: 20px; font-weight: bold; }
+        .price-card { background: #21262d; border: 1px solid #30363d; padding: 15px; margin: 15px 0; border-radius: 12px; transition: 0.3s; cursor: pointer; text-align: left; }
+        .price-card:hover { border-color: #f85149; transform: translateY(-3px); background: #262c36; }
+        .price-card h4 { margin: 0; color: #58a6ff; }
+        .price-card p { margin: 5px 0; font-size: 0.9rem; }
+        .price { font-weight: bold; color: #3fb950; font-size: 1.1rem; }
+
+        .stats { background: #0d1117; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px solid #30363d; }
+        
+        button { background: #238636; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; margin-top: 10px; }
         button:hover { background: #2ea043; }
+
+        footer { margin-top: 30px; font-size: 0.75rem; color: #484f58; line-height: 1.4; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="developer-tag">তৈরি করেছেন: <span>শায়খ মোহাম্মদ</span></div>
-    
-    <div class="warning-light"></div> <span>সার্ভার স্ট্যাটাস: নজরদারিতে আছে</span>
+    <span class="dev-name">তৈরি করেছেন: <b>শায়খ মোহাম্মদ</b></span>
+    <div class="status">
+        <span class="dot"></span> সার্ভার স্ট্যাটাস: নজরদারিতে আছে
+    </div>
+
     <h1>🗳️ ভোট বাজার: ভিআইপি জোন</h1>
     <p class="tagline">"গণতন্ত্রের এই বাজারে, আপনিই সেরা পণ্য!"</p>
+    <hr style="border: 0.1px solid #30363d;">
 
-    <div class="secret-card" onclick="secret('অন্ধকার')">
-        <h4>🌑 রাতের আধারে সিল মারা প্যাকেজ</h4>
-        <p>সকাল পর্যন্ত অপেক্ষা করার সময় নেই? রাতেই কাজ শেষ!</p>
-        <span class="price">বিনিময়: ১ প্যাকেট বিরিয়ানি + ১টি হাফ প্যান্ট</span>
+    <h3>আজকের রেট চার্ট (অফার সীমিত)</h3>
+
+    <div class="price-card" onclick="buy('চা-শিঙাড়া')">
+        <h4>লোকাল পাতি নেতা প্যাকেজ</h4>
+        <p>১টি ভোট = ১ কাপ চা + ২টা গরম শিঙাড়া</p>
+        <span class="price">মূল্য: ৫ টাকা (ঘুষ ফ্রী)</span>
     </div>
 
-    <div class="secret-card" onclick="secret('বিদেশ')">
-        <h4>✈️ ওমরাহ/ভ্যাকেশন প্যাকেজ</h4>
-        <p>ভোট দিয়ে সরাসরি এয়ারপোর্ট! এলাকায় থাকার ঝামেলা নেই।</p>
-        <span class="price">বিনিময়: ওয়ান ওয়ে টিকিট (ফেরার গ্যারান্টি নাই)</span>
+    <div class="price-card" onclick="buy('বিরিয়ানি')">
+        <h4>বিলাসবহুল ভোটার প্যাকেজ</h4>
+        <p>১টি ভোট = ১ প্যাকেট ঠান্ডা কাচ্চি (আলু ছাড়া)</p>
+        <span class="price">মূল্য: ৫০০ টাকা</span>
     </div>
 
-    <div class="secret-card" onclick="secret('ডিজিটাল')">
-        <h4>🤖 অটো-ভোট বট (AI Powered)</h4>
-        <p>আপনি ঘুমাবেন, কিন্তু আপনার ভোটটা ঠিকই কাস্ট হয়ে যাবে।</p>
-        <span class="price">বিনিময়: আপনার ফেসবুক আইডির পাসওয়ার্ড</span>
+    <div class="price-card" onclick="buy('আইফোন')">
+        <h4>ভিআইপি দালাল প্যাকেজ</h4>
+        <p>১০টি ভোট = আইফোন ১৬ প্রো ম্যাক্স (বক্স ছাড়া)</p>
+        <span class="price">মূল্য: ২ লক্ষ টাকা + রিমান্ড গ্যারান্টি</span>
     </div>
 
-    <hr style="border: 0.5px solid #30363d;">
-    
-    <button onclick="checkNID()">আপনার ভোট চুরি হয়েছে কি না চেক করুন</button>
+    <div class="stats">
+        <p>আজকের মোট ডিল সম্পন্ন হয়েছে: <span id="counter" style="color: #f85149; font-weight: bold;">৪২০</span> টি</p>
+        <p>স্টকে ভোট বাকি আছে: <span id="stock" style="color: #3fb950;">৭</span> টি</p>
+    </div>
 
-    <p style="font-size: 11px; margin-top: 25px; color: #8b949e; line-height: 1.5;">
-        *সতর্কবার্তা: এই সাইটে প্রবেশ করা মাত্রই আপনার লোকেশন ডিবি অফিসের বড় ভাইয়ের কাছে চলে গেছে। এটি একটি নিছক বিনোদনমূলক ওয়েবসাইট।*
-    </p>
+    <button onclick="sell()">আপনার ভোট বিক্রি করতে এখানে ক্লিক করুন</button>
+
+    <footer>
+        * শর্ত প্রযোজ্য: ভোট দেওয়ার পর প্রার্থী এলাকা ছাড়লে বা মোবাইল বন্ধ রাখলে শায়খ মোহাম্মদ দায়ী নয়। <br><br>
+        <strong>সতর্কতা:</strong> এটি একটি ফান প্রজেক্ট। সিরিয়াসলি নিয়ে আবার থানায় যাবেন না!
+    </footer>
 </div>
 
 <script>
-    function secret(type) {
-        if(type === 'অন্ধকার') {
-            alert("সাবধান! ব্যালট বক্স অলরেডি ভরে গেছে। আপনি বরং একটু চা খেয়ে বাসায় যান।");
-        } else if(type === 'বিদেশ') {
-            alert("সরি! এই অফারটি শুধু বড় ভাইদের দালালের জন্য প্রযোজ্য। আপনি লাইন ধরুন।");
-        } else {
-            alert("সিস্টেম এরর! আপনার ইমান খুব শক্তিশালী, তাই হ্যাক করা যাচ্ছে না।");
-        }
+    function buy(item) {
+        alert("অভিনন্দন! আপনি " + item + " এর বিনিময়ে আপনার ইমান বন্ধক রেখেছেন। অতি শীঘ্রই আপনার বাড়ির সামনে সাদা মাইক্রোবাস পাঠানো হবে।");
+        let count = document.getElementById('counter');
+        count.innerText = parseInt(count.innerText) + 1;
     }
 
-    function checkNID() {
-        let nid = prompt("আপনার ১০ ডিজিটের NID নাম্বার দিন (নিরাপদ থাকবে ইনশাআল্লাহ):");
-        if(nid) {
-            alert("দুঃখিত! এই NID দিয়ে অলরেডি ৩ বার ভোট দেওয়া হয়ে গেছে। আপনি অনেক লেট করে ফেলেছেন!");
+    function sell() {
+        let name = prompt("আপনার নাম কি? (ভোট চুরির সুবিধার জন্য লাগবে)");
+        if(name) {
+            alert("ধন্যবাদ " + name + "! আপনার তথ্য ডার্ক ওয়েবে পাচার করা হয়েছে। আপনার এলাকার বড় ভাই শীঘ্রই আপনার সাথে যোগাযোগ করবে।");
         }
     }
 </script>
