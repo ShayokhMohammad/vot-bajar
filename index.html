@@ -3,166 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভোট বাজার মেগা প্রজেক্ট - শায়খ মোহাম্মদ</title>
+    <title>ভোট বাজার - শায়খ মোহাম্মদ</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #0d1117; color: #c9d1d9; text-align: center; margin: 0; overflow-x: hidden; padding-bottom: 50px; }
-        .container { max-width: 800px; margin: 20px auto; background: #161b22; padding: 30px; border-radius: 20px; border: 2px solid #30363d; position: relative; z-index: 10; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d1117; color: #c9d1d9; text-align: center; margin: 0; padding: 20px; }
         
-        /* সাদা মাইক্রোবাস এনিমেশন */
-        #van { position: fixed; top: 50%; left: -300px; width: 250px; z-index: 9999; transition: 2s linear; pointer-events: none; }
+        .container { max-width: 650px; margin: auto; background: #161b22; padding: 30px; border-radius: 20px; border: 2px solid #30363d; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         
-        .dev-tag { font-size: 1.2rem; color: #58a6ff; font-weight: bold; margin-bottom: 10px; display: block; }
-        .status-bar { background: #21262d; padding: 10px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; color: #f85149; font-weight: bold; margin-bottom: 20px; border: 1px solid #f85149; }
-        .dot { height: 12px; width: 12px; background: #f85149; border-radius: 50%; animation: blink 0.8s infinite; }
+        .dev-name { font-size: 1.1rem; color: #8b949e; margin-bottom: 5px; display: block; }
+        .dev-name b { color: #58a6ff; text-shadow: 0 0 5px rgba(88, 166, 255, 0.3); }
+
+        .status { font-size: 0.9rem; color: #f85149; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: bold; }
+        .dot { height: 12px; width: 12px; background-color: #f85149; border-radius: 50%; display: inline-block; animation: blink 1s infinite; box-shadow: 0 0 10px #f85149; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        h1 { color: #f85149; font-size: 2.5rem; margin: 0; text-shadow: 2px 2px #000; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-
-        .card { background: #21262d; border: 1px solid #30363d; padding: 15px; border-radius: 15px; cursor: pointer; text-align: left; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-color: #f85149; background: #262c36; }
-        .card h4 { margin: 0; color: #58a6ff; }
-        .price { color: #3fb950; font-weight: bold; display: block; margin-top: 10px; }
-
-        /* লিডারবোর্ড */
-        .leaderboard { margin-top: 30px; background: #0d1117; padding: 20px; border-radius: 15px; border: 1px solid #30363d; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 10px; border-bottom: 1px solid #30363d; text-align: left; }
-        th { color: #f0ad4e; }
-
-        /* লাইভ চ্যাট পপআপ */
-        #notification { position: fixed; bottom: 20px; right: 20px; background: #238636; color: white; padding: 15px; border-radius: 10px; display: none; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        h1 { color: #f85149; margin: 5px 0; font-size: 2.2rem; text-transform: uppercase; }
+        .tagline { font-style: italic; color: #8b949e; margin-bottom: 30px; font-size: 1.1rem; }
         
-        button.main-btn { background: #f85149; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.2rem; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 500px) { .grid-container { grid-template-columns: 1fr; } }
+
+        .price-card { background: #21262d; border: 1px solid #30363d; padding: 15px; border-radius: 15px; transition: 0.3s; cursor: pointer; text-align: left; position: relative; overflow: hidden; }
+        .price-card:hover { border-color: #f85149; transform: scale(1.03); background: #262c36; box-shadow: 0 5px 15px rgba(248, 81, 73, 0.2); }
+        .price-card h4 { margin: 0 0 10px 0; color: #58a6ff; font-size: 1.1rem; }
+        .price-card p { margin: 5px 0; font-size: 0.85rem; color: #c9d1d9; min-height: 40px; }
+        .price { font-weight: bold; color: #3fb950; font-size: 1rem; display: block; margin-top: 10px; border-top: 1px solid #30363d; padding-top: 10px; }
+
+        .stats { background: #0d1117; padding: 20px; border-radius: 12px; margin-top: 25px; border: 1px solid #30363d; display: flex; justify-content: space-around; }
+        .stats p { margin: 0; font-size: 0.95rem; }
         
-        /* টাইম কাউন্টার */
-        .timer { font-size: 1.5rem; color: #f0ad4e; margin: 15px 0; font-family: 'Courier New', Courier, monospace; }
+        button { background: #d9534f; color: white; border: none; padding: 15px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; width: 100%; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #bd362f; box-shadow: 0 0 20px rgba(217, 83, 79, 0.4); }
+
+        footer { margin-top: 30px; font-size: 0.8rem; color: #484f58; line-height: 1.6; border-top: 1px solid #30363d; padding-top: 20px; }
     </style>
 </head>
 <body>
 
-<audio id="siren" src="https://www.soundjay.com/buttons/beep-01a.mp3" preload="auto"></audio>
-<audio id="police" src="https://www.soundjay.com/mechanical/siren-1.mp3" preload="auto"></audio>
-
-<img id="van" src="https://www.pngarts.com/files/3/White-Van-PNG-Image-Background.png" alt="Sada Micro">
-
-<div id="notification"></div>
-
 <div class="container">
-    <span class="dev-tag">প্রজেক্ট ডিরেক্টর: <b>শায়খ মোহাম্মদ</b></span>
-    <div class="status-bar"><span class="dot"></span> ডিবি সার্ভার নজরদারিতে আছে</div>
-    
-    <h1>🗳️ ভোট বাজার: মেগা ভিআইপি জোন</h1>
-    <div class="timer">ভোট চুরির সময় বাকি: <span id="time">04:20</span></div>
+    <span class="dev-name">তৈরি করেছেন: <b>শায়খ মোহাম্মদ</b></span>
+    <div class="status">
+        <span class="dot"></span> সার্ভার স্ট্যাটাস: নজরদারিতে আছে
+    </div>
 
-    <div class="grid">
-        <div class="card" onclick="action('চা-শিঙাড়া')">
+    <h1>🗳️ ভোট বাজার: ভিআইপি জোন</h1>
+    <p class="tagline">"গণতন্ত্রের এই বাজারে, আপনিই সেরা পণ্য!"</p>
+
+    <h3 style="color: #f0ad4e;">🔥 আজকের রেট চার্ট (অফার সীমিত)</h3>
+
+    <div class="grid-container">
+        <div class="price-card" onclick="buy('চা-শিঙাড়া')">
             <h4>লোকাল পাতি নেতা প্যাকেজ</h4>
             <p>১টি ভোট = ১ কাপ চা + ২টা গরম শিঙাড়া</p>
             <span class="price">মূল্য: ৫ টাকা (ঘুষ ফ্রী)</span>
         </div>
-        <div class="card" onclick="action('কাচ্চি')">
+
+        <div class="price-card" onclick="buy('কাচ্চি')">
             <h4>বিলাসবহুল ভোটার প্যাকেজ</h4>
             <p>১টি ভোট = ১ প্যাকেট ঠান্ডা কাচ্চি (আলু ছাড়া)</p>
             <span class="price">মূল্য: ৫০০ টাকা</span>
         </div>
-        <div class="card" onclick="action('সেলফি')">
+
+        <div class="price-card" onclick="buy('ফেসবুক হ্যাক')">
             <h4>ডিজিটাল কারচুপি প্যাকেজ</h4>
             <p>১০টি ভোট = এলাকার বড় ভাইয়ের সাথে সেলফি</p>
             <span class="price">মূল্য: ফ্রিতে রিমান্ড</span>
         </div>
-        <div class="card" onclick="action('আইফোন')">
+
+        <div class="price-card" onclick="buy('আইফোন ১৬')">
             <h4>ভিআইপি দালাল প্যাকেজ</h4>
             <p>১০টি ভোট = আইফোন ১৬ প্রো ম্যাক্স (বক্স ছাড়া)</p>
-            <span class="price">মূল্য: ২ লক্ষ টাকা</span>
+            <span class="price">মূল্য: ২ লক্ষ টাকা + গ্যারান্টি</span>
         </div>
-        <div class="card" onclick="action('টেন্ডার')">
+
+        <div class="price-card" onclick="buy('টেন্ডার')">
             <h4>টেন্ডারবাজ স্পেশাল</h4>
             <p>১০০টি ভোট = ১টি সরকারি রাস্তার কাজ (বালু ছাড়া)</p>
-            <span class="price">মূল্য: ১০ কোটি টাকা ক্যাশ</span>
+            <span class="price">মূল্য: ১০ কোটি টাকা (ক্যাশ)</span>
         </div>
-        <div class="card" onclick="action('এয়ারপোর্ট')">
+
+        <div class="price-card" onclick="buy('টিকিট')">
             <h4>সেফ এক্সিট প্যাকেজ</h4>
             <p>ভোট দিয়ে সরাসরি এয়ারপোর্ট! ওয়ান ওয়ে টিকিট</p>
             <span class="price">মূল্য: আজীবন এলাকা ত্যাগ</span>
         </div>
     </div>
 
-    <div class="leaderboard">
-        <h3>🏆 আজকের টপ দালাল লিডারবোর্ড</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>নাম</th>
-                    <th>ভোট সংখ্যা</th>
-                    <th>অর্জিত পদ</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboard-body">
-                <tr><td>শায়খ মোহাম্মদ</td><td>৯৯৯+</td><td>মাস্টারমাইন্ড</td></tr>
-                <tr><td>অজ্ঞাত দালাল</td><td>৪২০</td><td>পাতি নেতা</td></tr>
-            </tbody>
-        </table>
+    <div class="stats">
+        <p>ডিল সম্পন্ন: <span id="counter" style="color: #f85149; font-weight: bold;">৪২০</span> টি</p>
+        <p>স্টক বাকি: <span style="color: #3fb950; font-weight: bold;">৭</span> টি</p>
     </div>
 
-    <button class="main-btn" onclick="addToLeaderboard()">আপনার নাম লিডারবোর্ডে যোগ করুন</button>
+    <button onclick="sell()">আপনার ভোট বিক্রি করতে এখানে ক্লিক করুন</button>
 
     <footer>
-        শর্ত প্রযোজ্য: সাদা মাইক্রোবাসে ওঠার পর কারো সাথে কোনো যোগাযোগ করা যাবে না। <br>
-        <b>তৈরি করেছেন: শায়খ মোহাম্মদ</b>
+        * শর্ত প্রযোজ্য: ভোট দেওয়ার পর প্রার্থী এলাকা ছাড়লে বা মোবাইল বন্ধ রাখলে <b>শায়খ মোহাম্মদ</b> দায়ী নয়। <br><br>
+        <strong>সতর্কতা:</strong> এটি একটি ফান প্রজেক্ট। সিরিয়াসলি নিয়ে আবার ডিবি অফিসে যাবেন না!
     </footer>
 </div>
 
 <script>
-    // সাইরেন এবং ভ্যান এনিমেশন
-    function action(item) {
-        document.getElementById('siren').play();
-        const van = document.getElementById('van');
-        van.style.left = '110%'; // ভ্যান চলে যাবে
-        
-        setTimeout(() => {
-            alert("সতর্কতা! " + item + " প্যাকেজটি নেয়ার অপরাধে সাদা মাইক্রোবাস আপনার লোকেশনে রওনা দিয়েছে।");
-            van.style.left = '-300px'; // ভ্যান রিসেট
-        }, 2000);
+    function buy(item) {
+        alert("অভিনন্দন! আপনি " + item + " এর বিনিময়ে আপনার ইমান বন্ধক রেখেছেন। অতি শীঘ্রই আপনার বাড়ির সামনে হেলমেট বাহিনী পাঠানো হবে।");
+        let count = document.getElementById('counter');
+        count.innerText = parseInt(count.innerText) + 1;
     }
 
-    // লিডারবোর্ড ফাংশন
-    function addToLeaderboard() {
-        let name = prompt("আপনার আসল নাম বা দালালি নাম দিন:");
-        let amount = Math.floor(Math.random() * 500) + 1;
+    function sell() {
+        let name = prompt("আপনার নাম কি? (ভোট চুরির সুবিধার জন্য লাগবে)");
         if(name) {
-            document.getElementById('police').play();
-            let table = document.getElementById('leaderboard-body');
-            let row = `<tr><td>${name}</td><td>${amount}</td><td>পেশাদার দালাল</td></tr>`;
-            table.innerHTML = row + table.innerHTML;
-            alert("অভিনন্দন " + name + "! আপনি সফলভাবে তালিকায় নাম লিখিয়েছেন। ডিবি অফিস থেকে শীঘ্রই কল পাবেন।");
+            alert("ধন্যবাদ " + name + "! আপনার তথ্য ডার্ক ওয়েবে পাচার করা হয়েছে। বড় ভাই একটু পরেই চা খাওয়ার দাওয়াত দিতে ফোন করবে।");
         }
     }
-
-    // লাইভ চ্যাট নোটিফিকেশন
-    const messages = [
-        "জনৈক মফিজ ১০টি ভোট বিক্রি করেছেন",
-        "বড় ভাই ১০০০ প্যাকেট বিরিয়ানি অর্ডার দিয়েছেন",
-        "হবিগঞ্জের এক নেতা রিমান্ডে গিয়েছেন",
-        "এক বন্ধু আইফোন ১৬ এর জন্য ইমান দিয়েছেন"
-    ];
-
-    setInterval(() => {
-        const notify = document.getElementById('notification');
-        notify.innerText = "🔔 " + messages[Math.floor(Math.random() * messages.length)];
-        notify.style.display = 'block';
-        setTimeout(() => notify.style.display = 'none', 3000);
-    }, 7000);
-
-    // টাইমার
-    let time = 260;
-    setInterval(() => {
-        let min = Math.floor(time / 60);
-        let sec = time % 60;
-        document.getElementById('time').innerText = `0${min}:${sec < 10 ? '0'+sec : sec}`;
-        if(time > 0) time--;
-    }, 1000);
 </script>
 
 </body>
